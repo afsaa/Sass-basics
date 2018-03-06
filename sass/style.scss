@@ -1,0 +1,84 @@
+//Import -> (Mezcla los archivos que estoy importando a este)
+@import "test";
+
+// Variables
+$font-stack: Helvetica, sans-serif;
+$primary-color: #333;
+$back-color: #00BFFF;
+$articles-background: #FFF;
+$articles-text: #333;
+
+// Mixins -> son como funciones!
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+body {
+  font: $font-stack;
+  color: $primary-color;
+  background-color: $back-color;
+  font-weight: bold;
+ }
+
+// Nesting -> para llevar una jerarquía marcada como en HTML.
+nav {
+  ul {
+     margin: 0;
+     padding: 0;
+     list-style: none;
+   }
+
+  li { display: inline-block; }
+
+  a {
+     display: block;
+     padding: 6px 12px;
+     text-decoration: none;
+     &:hover {
+       text-decoration: underline;
+     }
+   }
+ }
+
+.art1 {
+  background-color: $articles-background;
+  color: $articles-text;
+}
+
+.art1 { @include border-radius(10px); }
+
+//Include -> funciona para evitar meter varias clases en elementos HTML.
+// This CSS won't print because %equal-heights is never extended.
+%equal-heights {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// This CSS will print because %message-shared is extended.
+%message-shared {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.message {
+  @extend %message-shared;
+}
+
+.success {
+  @extend %message-shared;
+  border-color: green;
+}
+
+.error {
+  @extend %message-shared;
+  border-color: red;
+}
+
+.warning {
+  @extend %message-shared;
+  border-color: yellow;
+}
